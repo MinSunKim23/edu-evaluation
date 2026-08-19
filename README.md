@@ -13,7 +13,6 @@
 | `index.html` | 교과목 소개 페이지 본문 (CSS·JS 내장, 외부 리소스 없음) |
 | `404.html` | 잘못된 주소 접근 시 안내 페이지 |
 | `.nojekyll` | GitHub Pages의 Jekyll 빌드를 건너뛰게 하는 표시 파일 |
-| `.github/workflows/deploy.yml` | `main` 브랜치 푸시 시 자동 배포하는 GitHub Actions 워크플로 |
 
 ## GitHub Pages 배포 방법
 
@@ -35,15 +34,13 @@ git push -u origin main
 
 ### 3. Pages 켜기
 
-저장소 페이지에서 **Settings → Pages → Build and deployment → Source** 를 **GitHub Actions** 로 선택합니다.
+저장소 페이지에서 **Settings → Pages → Build and deployment → Source** 를 **Deploy from a branch** 로 두고, 브랜치는 `main`, 폴더는 `/ (root)` 로 지정합니다.
 
-푸시가 끝나면 Actions 탭에서 배포가 진행되고, 1~2분 뒤 아래 주소에서 페이지가 열립니다.
+1~2분 뒤 아래 주소에서 페이지가 열립니다.
 
 ```
 https://USERNAME.github.io/REPO/
 ```
-
-> Source를 **Deploy from a branch**(`main` / `/root`)로 선택해도 동작합니다. 그 경우 `.github/workflows/deploy.yml`은 없어도 됩니다.
 
 ### 4. 수정 후 다시 배포하기
 
