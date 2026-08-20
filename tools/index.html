@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="교육평가(연성대학교 유아교육과 2학년) 수업용 도구 · 개념 확인 퀴즈, 활동 타이머, 무작위 모둠 배정, 이해도 점검. 서버 없이 브라우저에서만 동작합니다." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23faf8f3'/%3E%3Ccircle cx='50' cy='50' r='27' fill='none' stroke='%23007b98' stroke-width='9'/%3E%3Cpath d='M50 31v21l14 9' fill='none' stroke='%23e86527' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E" />
+<title>교육평가 수업 도구 · 유아교육과 2학년</title>
+<style>
+:root {
+  --paper: #f6f2e9;
+  --paper-2: #ede8dd;
+  --surface: #ffffff;
+  --ink: #17191b;
+  --muted: #596168;
+  --line: #d8d4ca;
+  --cyan: #007b98;
+  --cyan-soft: #e5f5f8;
+  --orange: #e86527;
+  --orange-soft: #fff0e7;
+  --shadow: 0 18px 50px rgba(24, 29, 33, 0.09);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+a { color: var(--cyan); }
+button, input, select, textarea { font: inherit; }
+button, a, input, select, textarea { outline-offset: 3px; }
+:focus-visible { outline: 3px solid #007b98; }
+.skip-link { position: fixed; left: 16px; top: -80px; z-index: 1000; padding: 10px 14px; background: var(--ink); color: #fff; }
+.skip-link:focus { top: 16px; }
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 72px;
+  padding: 12px clamp(20px, 5vw, 76px);
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+.site-header img { width: 194px; height: auto; display: block; }
+.site-header p { margin: 0; color: var(--muted); font-size: 13px; font-weight: 700; text-align: right; }
+.shell { width: min(1240px, calc(100% - 40px)); margin: 0 auto; }
+.masthead { position: relative; overflow: hidden; padding: 72px 0 54px; border-bottom: 1px solid var(--line); }
+.masthead::after { content: ""; position: absolute; right: 3%; top: 34px; width: 180px; height: 180px; border: 1px solid rgba(0, 123, 152, .22); border-radius: 50%; box-shadow: 0 0 0 34px rgba(0, 123, 152, .05), 0 0 0 68px rgba(232, 101, 39, .035); }
+.eyebrow { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 18px; color: var(--cyan); font-size: 12px; font-weight: 900; letter-spacing: .12em; }
+.eyebrow::before { content: ""; width: 28px; height: 3px; background: var(--orange); }
+h1, h2, h3 { text-wrap: balance; }
+h1, .serif { font-family: "Noto Serif KR", "Nanum Myeongjo", Georgia, serif; }
+h1 { position: relative; z-index: 1; max-width: 900px; margin: 0; font-size: clamp(42px, 6vw, 78px); line-height: 1.12; letter-spacing: -.055em; }
+.lead { position: relative; z-index: 1; max-width: 790px; margin: 22px 0 0; color: var(--muted); font-size: 18px; }
+.notice { margin: 28px 0 0; padding: 15px 18px; border-left: 4px solid var(--orange); background: var(--orange-soft); color: #54301f; font-size: 14px; }
+.grid { display: grid; gap: 20px; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.workspace { display: grid; grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr); gap: 26px; padding: 38px 0 80px; align-items: start; }
+.panel, .paper-card { background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.panel { padding: 28px; }
+.panel.sticky { position: sticky; top: 96px; max-height: calc(100vh - 118px); overflow: auto; }
+.panel-header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid var(--ink); }
+.panel-header h2 { margin: 0; font-size: 22px; }
+.panel-header span { color: var(--cyan); font-size: 11px; font-weight: 900; letter-spacing: .08em; }
+label { display: grid; gap: 7px; margin: 0 0 16px; color: #34393d; font-size: 13px; font-weight: 800; }
+input, select, textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 11px 12px;
+  border: 1px solid #bfc3c4;
+  border-radius: 0;
+  background: #fff;
+  color: var(--ink);
+}
+textarea { min-height: 100px; resize: vertical; line-height: 1.55; }
+input:focus, select:focus, textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px var(--cyan-soft); }
+.hint { margin: -8px 0 16px; color: var(--muted); font-size: 12px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.button {
+  min-height: 44px;
+  padding: 0 17px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 850;
+}
+.button.secondary { background: #fff; color: var(--ink); }
+.button.cyan { border-color: var(--cyan); background: var(--cyan); color: #fff; }
+.button.orange { border-color: var(--orange); background: var(--orange-soft); color: #612c17; }
+.button:disabled { cursor: not-allowed; opacity: .45; }
+.status { min-height: 24px; margin: 14px 0 0; color: var(--cyan); font-size: 13px; font-weight: 800; }
+.paper-card { overflow: hidden; }
+.paper-topline { height: 7px; background: linear-gradient(90deg, var(--cyan) 0 72%, var(--orange) 72%); }
+.paper-body { padding: clamp(28px, 5vw, 64px); }
+.paper-kicker { margin: 0 0 12px; color: var(--cyan); font-size: 11px; font-weight: 900; letter-spacing: .13em; }
+.paper-title { margin: 0; font-family: "Noto Serif KR", "Nanum Myeongjo", Georgia, serif; font-size: clamp(36px, 5vw, 62px); line-height: 1.15; letter-spacing: -.045em; }
+.paper-summary { max-width: 760px; margin: 18px 0 0; color: var(--muted); font-size: 16px; }
+.paper-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 30px 0 0; padding-top: 18px; border-top: 1px solid var(--line); color: #3e464b; font-size: 13px; font-weight: 750; }
+.section-block { padding: 38px 0; border-top: 1px solid var(--line); }
+.section-block:first-of-type { margin-top: 42px; }
+.section-index { color: var(--orange); font-size: 12px; font-weight: 950; letter-spacing: .12em; }
+.section-block h2 { margin: 8px 0 20px; font-family: "Noto Serif KR", "Nanum Myeongjo", Georgia, serif; font-size: clamp(26px, 3vw, 38px); }
+.section-block p { color: #42494e; }
+.list-clean { margin: 0; padding: 0; list-style: none; }
+.list-clean li { padding: 12px 0; border-top: 1px solid var(--line); }
+.list-clean li::before { content: "◆"; margin-right: 10px; color: var(--cyan); font-size: 9px; }
+.week-table { width: 100%; border-collapse: collapse; }
+.week-table th, .week-table td { padding: 13px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.week-table th { width: 92px; color: var(--cyan); font-size: 12px; }
+.resource-links { display: grid; gap: 10px; }
+.resource-links a { display: flex; justify-content: space-between; gap: 16px; padding: 14px 16px; border: 1px solid var(--line); background: #fff; color: var(--ink); text-decoration: none; }
+.resource-links a:hover { border-color: var(--cyan); }
+.callout { padding: 18px 20px; border-left: 4px solid var(--cyan); background: var(--cyan-soft); }
+.callout.orange { border-left-color: var(--orange); background: var(--orange-soft); }
+.step-list { counter-reset: steps; display: grid; gap: 16px; margin: 28px 0; padding: 0; list-style: none; }
+.step-list > li { counter-increment: steps; display: grid; grid-template-columns: 48px 1fr; gap: 16px; padding: 20px; background: #fff; border: 1px solid var(--line); }
+.step-list > li::before { content: counter(steps, decimal-leading-zero); display: grid; place-items: center; width: 48px; height: 38px; background: var(--ink); color: #fff; font-weight: 900; }
+.step-list h3 { margin: 0 0 8px; }
+.step-list p { margin: 0; color: var(--muted); }
+.checklist { display: grid; gap: 10px; margin: 18px 0; }
+.checklist label { display: flex; align-items: flex-start; gap: 10px; margin: 0; padding: 12px; border: 1px solid var(--line); background: #fff; font-weight: 650; }
+.checklist input { width: 20px; min-height: 20px; margin-top: 2px; }
+.checkpoint { margin: 20px 0; padding: 22px; background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--orange); }
+.checkpoint h3 { margin: 0 0 12px; }
+.checkpoint dl { display: grid; grid-template-columns: 110px 1fr; gap: 8px 18px; margin: 0; }
+.checkpoint dt { color: var(--cyan); font-weight: 900; }
+.checkpoint dd { margin: 0; color: var(--muted); }
+.footer { padding: 30px 0 50px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+.tab { min-height: 42px; padding: 0 15px; border: 1px solid var(--line); background: #fff; color: var(--ink); cursor: pointer; font-weight: 800; }
+.tab[aria-selected="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+[hidden] { display: none !important; }
+.meter { height: 14px; overflow: hidden; background: var(--paper-2); }
+.meter > span { display: block; height: 100%; background: linear-gradient(90deg, var(--cyan), var(--orange)); transition: width .25s ease; }
+.app-box { padding: 24px; background: #fff; border: 1px solid var(--line); }
+.app-box h2, .app-box h3 { margin-top: 0; }
+.tag { display: inline-block; padding: 5px 9px; background: var(--cyan-soft); color: #005c72; font-size: 11px; font-weight: 850; }
+.danger-note { color: #7b2e12; font-weight: 800; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* 작은 강조 문구와 링크의 밝은 배경 대비를 4.5:1 이상으로 고정합니다. */
+a, .eyebrow, .panel-header span, .paper-kicker, .section-index,
+.week-table th, .checkpoint dt, .status { color: #8f2f12; }
+
+@media (max-width: 900px) {
+  .workspace, .grid.two, .grid.three { grid-template-columns: 1fr; }
+  .panel.sticky { position: static; max-height: none; }
+  .masthead::after { opacity: .35; right: -80px; }
+}
+@media (max-width: 620px) {
+  .site-header { align-items: flex-start; padding-inline: 16px; }
+  .site-header img { width: 154px; }
+  .site-header p { max-width: 140px; font-size: 10px; }
+  .shell { width: min(100% - 28px, 1240px); }
+  .masthead { padding-top: 52px; }
+  .lead { font-size: 15px; }
+  .panel, .paper-body, .app-box { padding: 20px; }
+  .step-list > li { grid-template-columns: 1fr; }
+  .checkpoint dl { grid-template-columns: 1fr; }
+}
+@media print {
+  .site-header, .editor-only, .actions, .tabs, .skip-link { display: none !important; }
+  body { background: #fff; }
+  .shell { width: 100%; }
+  .panel, .paper-card, .app-box { box-shadow: none; }
+  a { color: #000; text-decoration: underline; }
+}
+</style>
+<style>
+.starter-tools{padding:42px 0 80px}
+.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tool-card{min-height:240px;padding:26px;background:#fff;border:1px solid var(--line);border-top:5px solid var(--cyan)}
+.tool-card:nth-child(even){border-top-color:var(--orange)}
+.tool-card h2{margin:6px 0;font-family:Georgia,"Noto Serif KR",serif}
+.placeholder{padding:16px;border:2px dashed #a7adaf;color:var(--muted)}
+@media(max-width:700px){.tool-grid{grid-template-columns:1fr}}
+
+/* 01 · 퀴즈 카드에서만 쓰는 모양입니다. */
+.tool-hint{margin:0 0 16px;color:var(--muted);font-size:13px}
+.quiz-item{padding:16px 0;border-top:1px solid var(--line)}
+.quiz-item:first-child{padding-top:4px;border-top:0}
+.quiz-item fieldset{margin:0;padding:0;border:0}
+.quiz-item legend{padding:0;font-size:14px;font-weight:800}
+.quiz-options{display:grid;gap:6px;margin-top:10px}
+.quiz-options label{display:flex;align-items:flex-start;gap:9px;margin:0;padding:9px 11px;border:1px solid var(--line);background:#fff;font-size:14px;font-weight:650;cursor:pointer}
+.quiz-options label:hover{border-color:var(--cyan)}
+.quiz-options input{flex:none;width:18px;min-height:18px;margin:3px 0 0}
+.quiz-fb{margin:11px 0 0;font-size:13px;font-weight:800}
+.quiz-fb.ok{color:#0a5c3e}
+.quiz-fb.no{color:#8f2f12}
+.quiz-note{margin:6px 0 0;color:var(--muted);font-size:12px;font-weight:700}
+.quiz-fb:empty,.quiz-note:empty{display:none}
+
+/* 02 · 타이머 카드에서만 쓰는 모양입니다. */
+.timer-display{margin:0;padding:16px 10px;border:1px solid var(--line);background:var(--paper-2);font-size:46px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.02em;line-height:1.1;text-align:center}
+.timer-display.done{border-color:var(--orange);border-width:3px;background:var(--orange-soft);color:#8f2f12}
+.timer-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.timer-fields label{margin:0}
+
+/* 03 · 모둠 카드에서만 쓰는 모양입니다. */
+.group-lines{margin:10px 0 0;padding:0;list-style:none}
+.group-lines li{padding:7px 10px;margin-top:6px;border-left:3px solid #8f2f12;background:#fdf1ec;color:#7b2e12;font-size:13px;font-weight:700}
+.group-lines li.note{border-left-color:var(--cyan);background:var(--cyan-soft);color:#005c72}
+.group-box{margin-top:12px;padding:12px 14px;border:1px solid var(--line);border-left:4px solid var(--cyan);background:var(--paper-2)}
+.group-box:nth-child(even){border-left-color:var(--orange)}
+.group-box h3{margin:0 0 4px;font-size:14px}
+.group-box p{margin:0;font-size:14px;font-weight:700;word-break:break-all}
+.group-summary{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:13px;font-weight:800}
+
+/* 04 · 피드백 카드에서만 쓰는 모양입니다. */
+.fb-row{display:grid;grid-template-columns:96px 1fr 38px;align-items:center;gap:10px;margin-bottom:9px}
+.fb-name{font-size:13px;font-weight:800}
+.fb-num{font-size:14px;font-weight:900;text-align:right;font-variant-numeric:tabular-nums}
+.fb-total{margin:12px 0 18px;padding-top:11px;border-top:1px solid var(--line);font-size:13px;font-weight:800}
+.fb-guard{margin:-8px 0 14px;color:var(--muted);font-size:12px}
+.fb-list{margin:14px 0 0;padding:0;list-style:none}
+.fb-list li{margin-top:6px;padding:9px 11px;border:1px solid var(--line);background:#fff;font-size:13px}
+.fb-tag{display:inline-block;margin-right:8px;padding:2px 7px;background:var(--cyan-soft);color:#005c72;font-size:11px;font-weight:850}
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALMAAAAuCAYAAABj7ChuAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDhFMzc1NDYxMUZEMTFFODhBRUVEQkI4ODc2QTc5QkYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDhFMzc1NDcxMUZEMTFFODhBRUVEQkI4ODc2QTc5QkYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0OEUzNzU0NDExRkQxMUU4OEFFRURCQjg4NzZBNzlCRiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0OEUzNzU0NTExRkQxMUU4OEFFRURCQjg4NzZBNzlCRiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Ptkc2kIAABB/SURBVHja7F0JdFRF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" alt="연성대학교" />
+    <p>교육평가 · 유아교육과 2학년</p>
+  </header>
+
+  <main>
+    <section class="masthead"><div class="shell">
+      <p class="eyebrow">교육평가 · 100분 수업 도구</p>
+      <h1>개념 확인 · 활동 시간<br />모둠 · 이해도 점검</h1>
+      <p class="lead">한 화면에서 네 가지를 씁니다. 개념 확인 퀴즈, 팀 활동 타이머, 무작위 모둠 배정, 수업 끝 이해도 점검. 인터넷 없이 열리며 저장되는 값은 없습니다.</p>
+      <p class="notice">참여자 ID와 피드백은 가상 자료만 사용합니다. 실제 이름·학번·연락처는 입력하지 않습니다.</p>
+    </div></section>
+
+    <div class="shell starter-tools"><div class="tool-grid">
+
+      <section class="tool-card">
+        <span class="section-index">01 · QUIZ</span>
+        <h2>퀴즈</h2>
+        <p class="tool-hint">보기를 누르면 그 자리에서 정답과 해설이 나옵니다. 교육평가 개념 확인 문항 3개입니다.</p>
+        <div id="quiz-list"></div>
+        <div class="actions">
+          <button class="button cyan" type="button" id="quiz-score">전체 결과 보기</button>
+          <button class="button secondary" type="button" id="quiz-reset">다시 풀기</button>
+        </div>
+        <p class="status" id="quiz-result" role="status"></p>
+      </section>
+
+      <section class="tool-card">
+        <span class="section-index">02 · TIMER</span>
+        <h2>타이머</h2>
+        <p class="tool-hint">분과 초를 정하고 시작합니다. 끝나면 소리 없이 화면 색과 글자로 알립니다.</p>
+        <p class="timer-display" id="timer-view" role="timer" aria-label="남은 시간">05:00</p>
+        <div class="timer-fields">
+          <label for="timer-min">분 (0~90)
+            <input type="number" id="timer-min" min="0" max="90" step="1" value="5" inputmode="numeric" />
+          </label>
+          <label for="timer-sec">초 (0~59)
+            <input type="number" id="timer-sec" min="0" max="59" step="1" value="0" inputmode="numeric" />
+          </label>
+        </div>
+        <p class="status" id="timer-msg" role="status"></p>
+        <div class="actions">
+          <button class="button cyan" type="button" id="timer-start">시작</button>
+          <button class="button secondary" type="button" id="timer-pause">일시정지</button>
+          <button class="button secondary" type="button" id="timer-reset">초기화</button>
+          <button class="button orange" type="button" id="timer-undo" hidden>직전 상태 복원</button>
+        </div>
+      </section>
+
+      <section class="tool-card">
+        <span class="section-index">03 · GROUPS</span>
+        <h2>모둠 구성</h2>
+        <p class="tool-hint">가상 참여자 ID만 넣습니다. 실제 이름과 학번은 쓰지 마세요.</p>
+        <label for="group-ids">참여자 ID · 한 줄에 하나 (S + 숫자 3자리)
+<textarea id="group-ids" rows="7" spellcheck="false">S001
+S002
+S003
+S004
+S005
+S006
+S007
+S008
+S009
+S010
+S011
+S012</textarea>
+        </label>
+        <label for="group-count">모둠 수 (2~6)
+          <input type="number" id="group-count" min="2" max="6" step="1" value="3" inputmode="numeric" />
+        </label>
+        <p class="status" id="group-msg" role="status"></p>
+        <ul class="group-lines" id="group-lines"></ul>
+        <div class="actions">
+          <button class="button cyan" type="button" id="group-run">모둠 배정</button>
+          <button class="button secondary" type="button" id="group-shuffle">다시 섞기</button>
+          <button class="button orange" type="button" id="group-restore" hidden>기본값 S001~S012 되돌리기</button>
+        </div>
+        <div id="group-result"></div>
+      </section>
+
+      <section class="tool-card">
+        <span class="section-index">04 · FEEDBACK</span>
+        <h2>피드백</h2>
+        <p class="tool-hint">가상 응답만 넣습니다. 이 화면 안에서 바로 다시 계산할 뿐, 여러 사람이 동시에 접속하는 방식이 아닙니다.</p>
+        <div id="fb-bars"></div>
+        <p class="fb-total" id="fb-total">총 0건</p>
+        <label for="fb-category">범주
+          <select id="fb-category">
+            <option value="">범주를 고르세요</option>
+            <option value="이해됨">이해됨</option>
+            <option value="더 설명 필요">더 설명 필요</option>
+            <option value="질문 있음">질문 있음</option>
+          </select>
+        </label>
+        <label for="fb-comment">짧은 의견 · 선택 입력 (60자까지)
+          <input type="text" id="fb-comment" maxlength="80" placeholder="예: 가상 사례를 따라 하니 흐름을 이해했습니다" />
+        </label>
+        <p class="fb-guard">숫자·이메일 형식만 확인하는 경고입니다. 개인정보를 모두 찾아내지는 못합니다.</p>
+        <p class="status" id="fb-msg" role="status"></p>
+        <div class="actions">
+          <button class="button cyan" type="button" id="fb-add">피드백 추가</button>
+          <button class="button secondary" type="button" id="fb-clear">전체 지우기</button>
+          <button class="button orange" type="button" id="fb-undo" hidden>직전 상태 복원</button>
+        </div>
+        <ul class="fb-list" id="fb-list"></ul>
+      </section>
+
+    </div>
+    <div class="callout" style="margin-top:22px">
+      <strong>이 도구의 한계</strong>
+      <p>서버·로그인·자동 저장이 없는 로컬 시제품입니다. 모둠과 피드백, 복원 기록은 이 브라우저 화면에만 있고 새로고침하면 모두 사라집니다. 실제 수업에 쓰기 전에는 가상 자료로 먼저 시험하고 대학 정책을 확인하세요.</p>
+    </div></div>
+  </main>
+
+  <footer class="footer"><div class="shell">교육용 화면 구조 · 실제 학생정보 입력 금지 · 입력한 값은 이 브라우저 화면에만 있으며 새로고침하면 사라집니다 · <a href="../">교육평가 강의 소개로 돌아가기</a></div></footer>
+
+<script>
+/* =========================================================
+   01 · 퀴즈
+   문항을 바꾸려면 아래 QUIZ 목록만 고치면 됩니다.
+   q       : 문항 내용
+   options : 보기 3개 (적은 순서대로 화면에 나옵니다)
+   answer  : 정답인 보기의 번호 (첫 번째가 0, 두 번째가 1, 세 번째가 2)
+   why     : 정답과 오답 모두에 함께 보여 줄 해설 한 줄
+   문항을 바꿀 때는 answer와 why도 반드시 같이 고쳐 주세요.
+   ========================================================= */
+var QUIZ = [
+  {
+    q: "이원목적분류표를 문항 제작보다 먼저 만드는 이유로 가장 알맞은 것은?",
+    options: [
+      "내용 영역과 행동 수준을 미리 배분해 문항이 한쪽에 쏠리지 않게 하려고",
+      "채점에 걸리는 시간을 줄이려고",
+      "학생의 최종 성적을 미리 예측하려고"
+    ],
+    answer: 0,
+    why: "무엇을(내용 영역) 어느 수준까지(행동 수준) 묻는지 먼저 정해야 문항이 고르게 나옵니다. 4주 산출물입니다."
+  },
+  {
+    q: "선다형 문항을 시행했더니 정답률이 0.95였습니다. 이 문항에 대한 설명으로 알맞은 것은?",
+    options: [
+      "어려운 문항이므로 해당 내용을 다시 가르쳐야 한다",
+      "쉬운 문항이며 학생을 구분하는 힘이 약할 가능성이 크다",
+      "정답률이 높으므로 타당도가 높다는 뜻이다"
+    ],
+    answer: 1,
+    why: "정답률이 곧 난이도 지수이고, 값이 높을수록 쉬운 문항입니다. 거의 모두 맞히면 변별도가 낮아집니다. 9주 문항분석표에서 확인합니다."
+  },
+  {
+    q: "같은 놀이 장면을 두 교사가 관찰했는데 기록이 서로 크게 달랐습니다. 먼저 점검할 것은?",
+    options: [
+      "관찰기록의 신뢰도",
+      "관찰 도구의 내용타당도",
+      "평가의 실용도"
+    ],
+    answer: 0,
+    why: "누가 재느냐에 따라 결과가 흔들리는 것은 신뢰도 문제입니다. 13주에 관찰자간 일치도로 확인합니다."
+  }
+];
+
+/* 문항별로 고른 보기 번호를 기억합니다. 아직 안 골랐으면 null 입니다.
+   이 값은 브라우저 메모리에만 있고 새로고침하면 사라집니다. */
+var quizPicked = [];
+
+var quizList = document.getElementById("quiz-list");
+var quizResult = document.getElementById("quiz-result");
+
+/* 화면에 문항·보기·해설 자리를 만듭니다. */
+function buildQuiz() {
+  QUIZ.forEach(function (item, i) {
+    quizPicked.push(null);
+
+    var box = document.createElement("div");
+    box.className = "quiz-item";
+
+    var fs = document.createElement("fieldset");
+    var lg = document.createElement("legend");
+    lg.textContent = "Q" + (i + 1) + ". " + item.q;
+    fs.appendChild(lg);
+
+    var opts = document.createElement("div");
+    opts.className = "quiz-options";
+
+    item.options.forEach(function (text, j) {
+      var label = document.createElement("label");
+
+      var radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = "quiz-q" + i;
+      radio.value = String(j);
+      radio.addEventListener("change", function () { pickAnswer(i, j); });
+
+      var span = document.createElement("span");
+      span.textContent = text;
+
+      label.appendChild(radio);
+      label.appendChild(span);
+      opts.appendChild(label);
+    });
+
+    fs.appendChild(opts);
+    box.appendChild(fs);
+
+    /* 정답과 해설이 나오는 자리 */
+    var fb = document.createElement("p");
+    fb.className = "quiz-fb";
+    fb.id = "quiz-fb-" + i;
+    fb.setAttribute("role", "status");
+    box.appendChild(fb);
+
+    /* 이미 답한 문항을 또 눌렀을 때 안내가 나오는 자리 */
+    var note = document.createElement("p");
+    note.className = "quiz-note";
+    note.id = "quiz-note-" + i;
+    box.appendChild(note);
+
+    quizList.appendChild(box);
+  });
+}
+
+/* 보기를 누르면 실행됩니다. */
+function pickAnswer(i, j) {
+  var note = document.getElementById("quiz-note-" + i);
+
+  if (quizPicked[i] !== null) {
+    /* 이미 답한 문항이면 원래 고른 보기로 되돌리고 안내만 합니다. */
+    checkRadio(i, quizPicked[i]);
+    note.textContent = "이미 답한 문항입니다. 다시 풀기를 눌러 주세요.";
+    return;
+  }
+
+  quizPicked[i] = j;
+  note.textContent = "";
+
+  var fb = document.getElementById("quiz-fb-" + i);
+  var isRight = (j === QUIZ[i].answer);
+  fb.textContent = (isRight ? "정답입니다. " : "다시 생각해 보세요. ") + QUIZ[i].why;
+  fb.className = "quiz-fb " + (isRight ? "ok" : "no");
+
+  /* 새로 답했으므로 아래의 전체 결과는 지웁니다. */
+  quizResult.textContent = "";
+}
+
+/* 특정 문항에서 원하는 보기를 다시 선택된 상태로 만듭니다. */
+function checkRadio(i, j) {
+  var radios = document.getElementsByName("quiz-q" + i);
+  for (var k = 0; k < radios.length; k++) {
+    radios[k].checked = (k === j);
+  }
+}
+
+/* 전체 결과 보기 */
+document.getElementById("quiz-score").addEventListener("click", function () {
+  var done = 0;
+  var right = 0;
+  var missing = [];
+
+  quizPicked.forEach(function (picked, i) {
+    if (picked === null) {
+      missing.push("Q" + (i + 1));
+    } else {
+      done = done + 1;
+      if (picked === QUIZ[i].answer) { right = right + 1; }
+    }
+  });
+
+  if (done === 0) {
+    quizResult.textContent = "문항을 먼저 하나 이상 풀어 주세요.";
+    return;
+  }
+
+  var text = QUIZ.length + "문항 중 " + right + "문항 정답";
+  if (missing.length > 0) {
+    text = text + " · 아직 답하지 않은 문항: " + missing.join(", ");
+  }
+  quizResult.textContent = text;
+});
+
+/* 다시 풀기 */
+document.getElementById("quiz-reset").addEventListener("click", function () {
+  var untouched = quizPicked.every(function (picked) { return picked === null; });
+  if (untouched) {
+    quizResult.textContent = "이미 처음 상태입니다.";
+    return;
+  }
+
+  QUIZ.forEach(function (item, i) {
+    quizPicked[i] = null;
+
+    var radios = document.getElementsByName("quiz-q" + i);
+    for (var k = 0; k < radios.length; k++) { radios[k].checked = false; }
+
+    var fb = document.getElementById("quiz-fb-" + i);
+    fb.textContent = "";
+    fb.className = "quiz-fb";
+
+    document.getElementById("quiz-note-" + i).textContent = "";
+  });
+
+  quizResult.textContent = "처음 상태로 되돌렸습니다. 다시 풀어 보세요.";
+});
+
+buildQuiz();
+
+
+/* =========================================================
+   02 · 타이머
+   남은 시간은 초 단위 숫자 하나(timerLeft)로만 기억합니다.
+   화면에 보이는 00:00 글자는 그 숫자를 분과 초로 바꿔 쓴 것입니다.
+   상태(timerState)는 네 가지뿐입니다.
+     idle    : 아직 시작 안 함
+     running : 1초씩 줄어드는 중
+     paused  : 잠시 멈춤
+     done    : 0초에 도달
+   ========================================================= */
+var timerMin = document.getElementById("timer-min");
+var timerSec = document.getElementById("timer-sec");
+var timerView = document.getElementById("timer-view");
+var timerMsg = document.getElementById("timer-msg");
+var timerPauseBtn = document.getElementById("timer-pause");
+var timerUndoBtn = document.getElementById("timer-undo");
+
+var timerLeft = 0;
+var timerState = "idle";
+var timerTick = null;  /* 1초마다 실행하는 예약 번호 */
+var timerUndo = null;  /* 초기화 직전 상태. 한 번 되돌리면 비웁니다. */
+
+/* 한 자리 숫자 앞에 0을 붙입니다. 7 → "07" */
+function twoDigits(n) {
+  return (n < 10 ? "0" : "") + n;
+}
+
+/* 남은 초를 00:00 모양으로 화면에 씁니다. */
+function showTime(sec) {
+  timerView.textContent = twoDigits(Math.floor(sec / 60)) + ":" + twoDigits(sec % 60);
+}
+
+/* 분·초 입력칸을 읽고 문제가 없는지 확인합니다.
+   문제가 없으면 {ok:true, total:전체초}, 있으면 {ok:false, msg:안내문}을 돌려줍니다. */
+function readTimerInput() {
+  var minText = timerMin.value.trim();
+  var secText = timerSec.value.trim();
+
+  if (minText === "" && secText === "") {
+    return { ok: false, msg: "분과 초를 입력해 주세요." };
+  }
+
+  var m = (minText === "") ? 0 : Number(minText);
+  var s = (secText === "") ? 0 : Number(secText);
+
+  if (m !== Math.floor(m) || s !== Math.floor(s) || m < 0 || s < 0) {
+    return { ok: false, msg: "0 이상의 숫자만 입력할 수 있습니다." };
+  }
+  if (s > 59) {
+    return { ok: false, msg: "초는 0에서 59까지 입력합니다." };
+  }
+  if (m > 90) {
+    return { ok: false, msg: "분은 0에서 90까지 입력합니다." };
+  }
+
+  var total = m * 60 + s;
+  if (total === 0) {
+    return { ok: false, msg: "1초 이상으로 설정해 주세요." };
+  }
+
+  var note = "";
+  if (minText === "") { note = "분을 0으로 보고 시작했습니다."; }
+  if (secText === "") { note = "초를 0으로 보고 시작했습니다."; }
+  return { ok: true, total: total, note: note };
+}
+
+/* 아직 시작 전일 때, 입력칸 값을 그대로 큰 글자에 보여 줍니다. */
+function showInputTime() {
+  var input = readTimerInput();
+  showTime(input.ok ? input.total : 0);
+}
+
+function stopTick() {
+  clearInterval(timerTick);
+  timerTick = null;
+}
+
+/* 1초마다 남은 시간을 1씩 줄입니다. */
+function runTimer() {
+  timerState = "running";
+  timerPauseBtn.textContent = "일시정지";
+  stopTick();
+  timerTick = setInterval(function () {
+    timerLeft = timerLeft - 1;
+    if (timerLeft <= 0) {
+      finishTimer();
+      return;
+    }
+    showTime(timerLeft);
+  }, 1000);
+}
+
+/* 0초에 닿았을 때 */
+function finishTimer() {
+  stopTick();
+  timerState = "done";
+  timerLeft = 0;
+  showTime(0);
+  timerView.classList.add("done");
+  timerPauseBtn.textContent = "일시정지";
+  timerMsg.textContent = "시간이 끝났습니다.";
+}
+
+/* 시작 */
+document.getElementById("timer-start").addEventListener("click", function () {
+  if (timerState === "running") {
+    timerMsg.textContent = "이미 진행 중입니다. 멈추려면 일시정지를 누르세요.";
+    return;
+  }
+  if (timerState === "paused") {
+    timerMsg.textContent = "일시정지 상태입니다. 계속을 눌러 주세요.";
+    return;
+  }
+
+  var input = readTimerInput();
+  if (!input.ok) {
+    timerMsg.textContent = input.msg;
+    return;
+  }
+
+  /* 새로 시작하면 이전 초기화 기록은 더 이상 쓰지 않습니다. */
+  timerUndo = null;
+  timerUndoBtn.hidden = true;
+
+  timerLeft = input.total;
+  timerView.classList.remove("done");
+  showTime(timerLeft);
+  runTimer();
+  timerMsg.textContent = input.note || "시작했습니다.";
+});
+
+/* 일시정지 · 계속 */
+timerPauseBtn.addEventListener("click", function () {
+  if (timerState === "running") {
+    stopTick();
+    timerState = "paused";
+    timerPauseBtn.textContent = "계속";
+    timerMsg.textContent = "일시정지했습니다.";
+    return;
+  }
+  if (timerState === "paused") {
+    runTimer();
+    timerMsg.textContent = "다시 갑니다.";
+    return;
+  }
+  timerMsg.textContent = "먼저 시작을 눌러 주세요.";
+});
+
+/* 초기화 : 확인 → 실행 → 직전 상태 1회 복원 */
+document.getElementById("timer-reset").addEventListener("click", function () {
+  if (timerState === "idle") {
+    timerMsg.textContent = "되돌릴 남은 시간이 없습니다.";
+    return;
+  }
+
+  var yes = window.confirm("남은 시간을 지우고 처음 값으로 되돌릴까요?");
+  if (!yes) {
+    timerMsg.textContent = "초기화를 취소했습니다. 남은 시간은 그대로입니다.";
+    return;
+  }
+
+  timerUndo = { left: timerLeft, state: timerState };
+
+  stopTick();
+  timerState = "idle";
+  timerLeft = 0;
+  timerView.classList.remove("done");
+  timerPauseBtn.textContent = "일시정지";
+  showInputTime();
+
+  timerUndoBtn.hidden = false;
+  timerMsg.textContent = "초기화했습니다. 직전 상태 복원으로 한 번만 되돌릴 수 있습니다.";
+});
+
+/* 직전 상태 복원 (1회) */
+timerUndoBtn.addEventListener("click", function () {
+  if (timerUndo === null) {
+    timerMsg.textContent = "되돌릴 기록이 없습니다.";
+    return;
+  }
+
+  timerLeft = timerUndo.left;
+  timerUndo = null;
+  timerUndoBtn.hidden = true;
+  showTime(timerLeft);
+
+  if (timerLeft <= 0) {
+    /* 시간이 이미 끝난 상태에서 초기화했던 경우입니다. */
+    timerState = "done";
+    timerView.classList.add("done");
+    timerMsg.textContent = "초기화 직전 상태로 되돌렸습니다. 그때 이미 시간이 끝나 있었습니다.";
+    return;
+  }
+
+  timerState = "paused";
+  timerView.classList.remove("done");
+  timerPauseBtn.textContent = "계속";
+  timerMsg.textContent = "초기화 직전 남은 시간으로 되돌렸습니다. 계속을 누르면 이어서 갑니다.";
+});
+
+/* 시작 전에는 입력칸을 고치는 대로 큰 글자도 함께 바뀝니다. */
+timerMin.addEventListener("input", function () { if (timerState === "idle") { showInputTime(); } });
+timerSec.addEventListener("input", function () { if (timerState === "idle") { showInputTime(); } });
+
+showInputTime();
+
+
+/* =========================================================
+   03 · 모둠 구성
+   허용하는 ID 형식은 S와 숫자 3자리(S001~S999)뿐입니다.
+   배정은 두 단계입니다.
+     1) 명단을 무작위로 섞는다
+     2) 앞에서부터 1모둠, 2모둠, 3모둠... 순서로 한 명씩 나눠 준다
+   이렇게 나누면 모둠별 인원 차이가 저절로 최대 1명이 됩니다.
+   ========================================================= */
+var DEFAULT_IDS = ["S001", "S002", "S003", "S004", "S005", "S006",
+                   "S007", "S008", "S009", "S010", "S011", "S012"];
+
+var groupIds = document.getElementById("group-ids");
+var groupCountInput = document.getElementById("group-count");
+var groupMsg = document.getElementById("group-msg");
+var groupLines = document.getElementById("group-lines");
+var groupResult = document.getElementById("group-result");
+var groupRestoreBtn = document.getElementById("group-restore");
+
+/* 마지막으로 검사를 통과한 명단입니다. 다시 섞기가 이 명단을 씁니다. */
+var groupLastList = null;
+var groupLastCount = 0;
+
+/* 안내 줄 지우기 */
+function clearGroupLines() {
+  groupLines.textContent = "";
+}
+
+/* 안내 줄 여러 개를 화면에 씁니다. kind가 "note"면 파란색 안내입니다. */
+function showGroupLines(items, kind) {
+  items.forEach(function (text) {
+    var li = document.createElement("li");
+    if (kind === "note") { li.className = "note"; }
+    li.textContent = text;
+    groupLines.appendChild(li);
+  });
+}
+
+/* 배정 결과를 지웁니다. 결과가 없으면 다시 섞기도 막힙니다. */
+function clearGroupResult() {
+  groupResult.textContent = "";
+  groupLastList = null;
+  groupLastCount = 0;
+}
+
+/* 입력칸을 한 줄씩 읽고 형식과 중복을 확인합니다. */
+function readGroupIds() {
+  var lines = groupIds.value.split("\n");
+  var list = [];
+  var errors = [];
+  var fixed = [];
+  var seen = {};
+  var hasText = false;
+
+  lines.forEach(function (line, index) {
+    var row = index + 1;
+    var value = line.trim();
+    if (value === "") { return; }   /* 빈 줄은 오류가 아니라 그냥 넘어갑니다 */
+    hasText = true;
+
+    var upper = value.toUpperCase();
+
+    if (!/^S[0-9]{3}$/.test(upper)) {
+      errors.push(row + "행 “" + value + "” : S와 숫자 3자리 형식이 아닙니다. 예: S001");
+      return;
+    }
+    if (upper !== value) {
+      fixed.push(row + "행 “" + value + "” 는 " + upper + " 로 맞췄습니다.");
+    }
+    if (seen[upper] === true) {
+      errors.push(row + "행 “" + value + "” : 앞에서 이미 나온 ID입니다.");
+      return;
+    }
+
+    seen[upper] = true;
+    list.push(upper);
+  });
+
+  if (!hasText) { return { empty: true }; }
+  return { empty: false, ok: (errors.length === 0), list: list, errors: errors, fixed: fixed };
+}
+
+/* 모둠 수 입력칸을 읽습니다. */
+function readGroupCount() {
+  var text = groupCountInput.value.trim();
+  if (text === "") {
+    return { ok: true, count: 3, note: "모둠 수를 3으로 보고 배정했습니다." };
+  }
+  var n = Number(text);
+  if (n !== Math.floor(n) || n < 2 || n > 6) {
+    return { ok: false, msg: "모둠 수는 2에서 6 사이로 입력해 주세요." };
+  }
+  return { ok: true, count: n, note: "" };
+}
+
+/* 명단 순서를 무작위로 섞은 새 배열을 돌려줍니다. */
+function shuffleList(items) {
+  var copy = items.slice();
+  for (var i = copy.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var keep = copy[i];
+    copy[i] = copy[j];
+    copy[j] = keep;
+  }
+  return copy;
+}
+
+/* 섞고, 나누고, 화면에 그립니다. */
+function drawGroups(list, count) {
+  var mixed = shuffleList(list);
+
+  var groups = [];
+  for (var g = 0; g < count; g++) { groups.push([]); }
+  mixed.forEach(function (id, i) { groups[i % count].push(id); });
+
+  groupResult.textContent = "";   /* 이전 결과를 먼저 지웁니다 */
+
+  var sizes = [];
+  groups.forEach(function (members, g) {
+    sizes.push(members.length);
+
+    var box = document.createElement("div");
+    box.className = "group-box";
+
+    var title = document.createElement("h3");
+    title.textContent = (g + 1) + "모둠 · " + members.length + "명";
+
+    var names = document.createElement("p");
+    names.textContent = members.join(", ");
+
+    box.appendChild(title);
+    box.appendChild(names);
+    groupResult.appendChild(box);
+  });
+
+  var small = Math.min.apply(null, sizes);
+  var big = Math.max.apply(null, sizes);
+  var perText = (small === big) ? (small + "명씩") : (big + "명 또는 " + small + "명");
+
+  var summary = document.createElement("p");
+  summary.className = "group-summary";
+  summary.textContent = "총 " + list.length + "명 · " + count + "모둠 · " + perText
+    + " (모둠별 인원 차이 " + (big - small) + "명)";
+  groupResult.appendChild(summary);
+}
+
+/* 모둠 배정 */
+document.getElementById("group-run").addEventListener("click", function () {
+  clearGroupLines();
+  groupRestoreBtn.hidden = true;
+
+  var parsed = readGroupIds();
+
+  if (parsed.empty) {
+    clearGroupResult();
+    groupMsg.textContent = "참여자 ID를 한 줄에 하나씩 입력해 주세요.";
+    groupRestoreBtn.hidden = false;
+    return;
+  }
+
+  if (!parsed.ok) {
+    clearGroupResult();
+    groupMsg.textContent = "아래 " + parsed.errors.length + "곳을 고친 뒤 다시 눌러 주세요. 배정하지 않았습니다.";
+    showGroupLines(parsed.errors, "bad");
+    return;
+  }
+
+  var counted = readGroupCount();
+  if (!counted.ok) {
+    clearGroupResult();
+    groupMsg.textContent = counted.msg;
+    return;
+  }
+  if (counted.count > parsed.list.length) {
+    clearGroupResult();
+    groupMsg.textContent = "참여자 " + parsed.list.length + "명보다 모둠 " + counted.count
+      + "개가 많습니다. 모둠 수를 줄여 주세요.";
+    return;
+  }
+
+  groupLastList = parsed.list;
+  groupLastCount = counted.count;
+  drawGroups(groupLastList, groupLastCount);
+
+  groupMsg.textContent = "배정했습니다." + (counted.note ? " " + counted.note : "");
+  if (parsed.fixed.length > 0) { showGroupLines(parsed.fixed, "note"); }
+});
+
+/* 다시 섞기 : 같은 명단으로 순서만 새로 섞습니다. */
+document.getElementById("group-shuffle").addEventListener("click", function () {
+  if (groupLastList === null) {
+    groupMsg.textContent = "먼저 모둠 배정을 눌러 주세요.";
+    return;
+  }
+  drawGroups(groupLastList, groupLastCount);
+  groupMsg.textContent = "같은 명단으로 다시 섞었습니다.";
+});
+
+/* 기본값 되돌리기 : 입력칸이 비었을 때만 나타납니다. */
+groupRestoreBtn.addEventListener("click", function () {
+  groupIds.value = DEFAULT_IDS.join("\n");
+  groupRestoreBtn.hidden = true;
+  clearGroupLines();
+  groupMsg.textContent = "기본 ID S001~S012를 다시 넣었습니다. 모둠 배정을 눌러 주세요.";
+});
+
+
+/* =========================================================
+   04 · 가상 피드백
+   범주 세 개는 고정입니다. 아래 FB_CATEGORIES 순서대로 막대가 그려집니다.
+   막대 길이는 가장 많은 범주를 100%로 두고 비율로 계산합니다.
+   따라서 숫자가 큰 범주의 막대가 항상 더 깁니다.
+   ========================================================= */
+var FB_CATEGORIES = ["이해됨", "더 설명 필요", "질문 있음"];
+
+var fbBars = document.getElementById("fb-bars");
+var fbTotal = document.getElementById("fb-total");
+var fbCategory = document.getElementById("fb-category");
+var fbComment = document.getElementById("fb-comment");
+var fbMsg = document.getElementById("fb-msg");
+var fbListBox = document.getElementById("fb-list");
+var fbUndoBtn = document.getElementById("fb-undo");
+
+var fbItems = [];      /* 지금까지 넣은 가상 응답 */
+var fbUndo = null;     /* 전체 지우기 직전 목록. 한 번 되돌리면 비웁니다. */
+var fbFills = [];      /* 막대 세 개 */
+var fbNums = [];       /* 숫자 세 개 */
+
+/* 범주마다 이름 · 막대 · 숫자 한 줄을 만듭니다. */
+function buildFeedbackBars() {
+  FB_CATEGORIES.forEach(function (name) {
+    var row = document.createElement("div");
+    row.className = "fb-row";
+
+    var label = document.createElement("span");
+    label.className = "fb-name";
+    label.textContent = name;
+
+    var meter = document.createElement("div");
+    meter.className = "meter";
+    var fill = document.createElement("span");
+    fill.style.width = "0%";
+    meter.appendChild(fill);
+
+    var num = document.createElement("span");
+    num.className = "fb-num";
+    num.textContent = "0";
+
+    row.appendChild(label);
+    row.appendChild(meter);
+    row.appendChild(num);
+    fbBars.appendChild(row);
+
+    fbFills.push(fill);
+    fbNums.push(num);
+  });
+}
+
+/* 목록을 다시 세어 숫자·막대·목록을 한꺼번에 갱신합니다. */
+function renderFeedback() {
+  var counts = FB_CATEGORIES.map(function () { return 0; });
+
+  fbItems.forEach(function (item) {
+    var i = FB_CATEGORIES.indexOf(item.category);
+    if (i >= 0) { counts[i] = counts[i] + 1; }
+  });
+
+  var biggest = Math.max.apply(null, counts);
+
+  counts.forEach(function (n, i) {
+    fbNums[i].textContent = String(n);
+    fbFills[i].style.width = (biggest === 0 ? 0 : Math.round(n / biggest * 100)) + "%";
+  });
+
+  fbTotal.textContent = "총 " + fbItems.length + "건";
+
+  fbListBox.textContent = "";
+  for (var k = fbItems.length - 1; k >= 0; k--) {   /* 최근에 넣은 것이 위로 옵니다 */
+    var li = document.createElement("li");
+
+    var tag = document.createElement("span");
+    tag.className = "fb-tag";
+    tag.textContent = fbItems[k].category;
+
+    var body = document.createElement("span");
+    body.textContent = (fbItems[k].comment === "") ? "(의견 없음)" : fbItems[k].comment;
+
+    li.appendChild(tag);
+    li.appendChild(body);
+    fbListBox.appendChild(li);
+  }
+}
+
+/* 의견 한 줄을 확인합니다. 문제가 없으면 {ok:true} 입니다. */
+function checkComment(text) {
+  if (text.length > 60) {
+    return { ok: false, msg: "의견은 60자까지 입력합니다. 지금 " + text.length + "자입니다." };
+  }
+  var looksLikePersonal =
+    /[0-9]{6,}/.test(text) ||
+    text.indexOf("@") >= 0 ||
+    /01[0-9][-\s]?[0-9]{3,4}[-\s]?[0-9]{4}/.test(text);
+
+  if (looksLikePersonal) {
+    return { ok: false, msg: "학번·연락처처럼 보이는 값이 있습니다. 가상 의견만 입력해 주세요." };
+  }
+  return { ok: true };
+}
+
+/* 피드백 추가 */
+document.getElementById("fb-add").addEventListener("click", function () {
+  var category = fbCategory.value;
+  if (category === "") {
+    fbMsg.textContent = "범주를 하나 골라 주세요.";
+    return;
+  }
+
+  var comment = fbComment.value.trim();
+  var checked = checkComment(comment);
+  if (!checked.ok) {
+    fbMsg.textContent = checked.msg;
+    return;
+  }
+
+  /* 새로 넣었으므로 이전 전체 지우기 기록은 더 이상 쓰지 않습니다. */
+  fbUndo = null;
+  fbUndoBtn.hidden = true;
+
+  fbItems.push({ category: category, comment: comment });
+  renderFeedback();
+
+  fbCategory.value = "";
+  fbComment.value = "";
+  fbMsg.textContent = category + " 1건을 더했습니다. 총 " + fbItems.length + "건입니다.";
+});
+
+/* 전체 지우기 : 확인 → 실행 → 직전 상태 1회 복원 */
+document.getElementById("fb-clear").addEventListener("click", function () {
+  if (fbItems.length === 0) {
+    fbMsg.textContent = "지울 피드백이 없습니다.";
+    return;
+  }
+
+  var yes = window.confirm("가상 피드백 " + fbItems.length + "건을 모두 지울까요?");
+  if (!yes) {
+    fbMsg.textContent = "전체 지우기를 취소했습니다. " + fbItems.length + "건 그대로입니다.";
+    return;
+  }
+
+  fbUndo = fbItems.slice();
+  fbItems = [];
+  renderFeedback();
+
+  fbUndoBtn.hidden = false;
+  fbMsg.textContent = "모두 지웠습니다. 직전 상태 복원으로 한 번만 되돌릴 수 있습니다.";
+});
+
+/* 직전 상태 복원 (1회) */
+fbUndoBtn.addEventListener("click", function () {
+  if (fbUndo === null) {
+    fbMsg.textContent = "되돌릴 기록이 없습니다.";
+    return;
+  }
+
+  fbItems = fbUndo;
+  fbUndo = null;
+  fbUndoBtn.hidden = true;
+  renderFeedback();
+
+  fbMsg.textContent = "지우기 직전 " + fbItems.length + "건으로 되돌렸습니다. 이 기록도 새로고침하면 사라집니다.";
+});
+
+buildFeedbackBars();
+renderFeedback();
+</script>
+</body>
+</html>
